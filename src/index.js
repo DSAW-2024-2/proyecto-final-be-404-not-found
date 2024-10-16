@@ -15,16 +15,14 @@ app.use(cors());
 
 // Conexión a MongoDB usando Mongoose
 mongoose
-  .connect(DataBase, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(DataBase)
   .then(() => console.log("Conectado a MongoDB"))
   .catch((err) => console.error("Error conectando a MongoDB", err));
 
 //USANDO ROUTES PARA SEPARAR EL CODIGO EN MODULOS
-//RUTA DE LOGIN
-app.use(require("./Routes/")); // Rutas
+app.use("/cars", require("./Routes/Cars"));
+app.use("/trip", require("./Routes/Trips"));
+app.use("/user", require("./Routes/Users"));
 
 // Capturar rutas no definidas (404)
 app.use((req, res) => {

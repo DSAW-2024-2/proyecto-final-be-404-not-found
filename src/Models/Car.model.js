@@ -1,7 +1,9 @@
-const { Schema } = require("mongoose");
+const { Schema, model } = require("mongoose");
 
 // Definir un esquema de ejemplo
 const CarSchema = new Schema({
+  _id: { type: String, required: true },
+
   brand: { type: String, required: false },
   model: { type: String, required: false },
   licensePlate: { type: String, required: false },
@@ -12,6 +14,6 @@ const CarSchema = new Schema({
   soatPhoto: { type: String, required: false }, // URL de la foto del SOAT (seguro obligatorio)
 });
 
-const Car = mongoose.model("Car", CarSchema);
+const Car = model("Car", CarSchema);
 
-module.exports = { Car };
+module.exports = { Car, CarSchema };

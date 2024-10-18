@@ -4,6 +4,8 @@
   "description": "Este proyecto consiste en un reto de desarrollo backend en el que se debe crear un endpoint llamado `user-info` utilizando el framework Express.js. El objetivo principal es que, al hacer una solicitud GET a este endpoint, se retorne un objeto JSON con la información de uno o dos estudiantes, dependiendo de si el equipo está compuesto por una o dos personas.",
   "main": "index.js",
   "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -16,5 +18,8 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.7.1",
     "proyecto-final-be-404-not-found": "file:"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
   }
 }

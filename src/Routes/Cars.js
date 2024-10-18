@@ -9,6 +9,8 @@ const { decode } = require("../Middlewares/secure.js");
 
 router.post("/", decode, async (req, res) => {
   try {
+    delete req.body._id;
+    req.body.busyNow = 0;
     // Verificar si el usuario ya tiene un carro registrado
     const existingCar = await Car.findById(req.user.id);
 
@@ -20,7 +22,7 @@ router.post("/", decode, async (req, res) => {
 
     // Crear un nuevo carro
     const newCar = new Car({
-      userId: req.user.id, // Cambié _id a userId si es necesario para el modelo de Car
+      _id: req.user.id,
       ...req.body,
     });
 
@@ -30,7 +32,7 @@ router.post("/", decode, async (req, res) => {
     // Actualizar el usuario con el nuevo vehículo
     await User.findByIdAndUpdate(
       req.user.id,
-      { vehicle: savedCar._id },
+      { vehicle: savedCar },
       { new: true }
     );
 
@@ -44,7 +46,40 @@ router.post("/", decode, async (req, res) => {
   }
 });
 
-route.put("/", decode, async (req, res) => {});
+router.put("/", decode, async (req, res) => {
+  try {
+    delete req.body._id;
+    delete req.body.brand;
+    delete req.body.model;
+    delete req.body.licensePlate;
+
+    // Buscar el carro del usuario
+    const car = await Car.findByIdAndUpdate(req.user.id, req.body, {
+      new: true,
+    });
+    // Si no se encuentra el carro, devolver un error
+    if (!car) {
+      return res.status(404).json({ message: "Carro no encontrado" });
+    }
+    const newUser = await User.findByIdAndUpdate(
+      req.user.id,
+      { vehicle: car },
+      { new: true }
+    );
+
+    await Trip.findByIdAndUpdate(
+      req.user.id,
+      { vehicle: car, driver: newUser },
+      { new: true }
+    );
+    // Responder con el carro actualizado
+    res.status(200).json(car);
+  } catch {
+    res
+      .status(500)
+      .json({ message: "Error al actualizar carro", error: err.message });
+  }
+});
 
 router.delete("/", decode, async (req, res) => {
   try {
@@ -64,7 +99,7 @@ router.delete("/", decode, async (req, res) => {
     );
 
     // Eliminar todos los viajes asociados al carro
-    await Trip.findByIdAndDelete(req.user.id); // Suponiendo que 'vehicleId' se refiere al carro
+    await Trip.findByIdAndDelete(req.user.id);
 
     // Respuesta exitosa
     res.status(200).send({ message: "Carro eliminado con éxito" });
@@ -76,10 +111,18 @@ router.delete("/", decode, async (req, res) => {
   }
 });
 
-route.get("/", (req, res) => {
-  Car.find()
-    .then((trips) => res.json(trips))
-    .catch((err) => res.status(500).json({ message: err.message }));
+router.get("/", decode, async (req, res) => {
+  try {
+    const car = await Car.findById(req.user.id);
+    if (!car) {
+      return res.status(404).send({ message: "Carro no encontrado" });
+    }
+    res.status(200).json(car);
+  } catch (err) {
+    res
+      .status(500)
+      .json({ message: "Error al obtener el carro", error: err.message });
+  }
 });
 
 module.exports = router;

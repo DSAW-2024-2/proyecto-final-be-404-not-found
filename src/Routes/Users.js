@@ -63,6 +63,7 @@ router.put("/", decode, async (req, res) => {
     await existing(req.body);
 
     // Eliminar campos no actualizables
+    delete req.body._id;
     delete req.body.email;
     delete req.body.idUniversidad;
 
@@ -165,14 +166,6 @@ router.post("/login", async (req, res) => {
       .send({ message: "Error al iniciar sesión", error: err.message });
   }
 });
-
-router.post("/recommed", (req, res) => {});
-
-router.get("/recommed", (req, res) => {});
-
-router.post("/forgottenpass", (req, res) => {});
-
-router.post("/comments", (req, res) => {});
 
 router.get("/", (req, res) => {
   User.find()

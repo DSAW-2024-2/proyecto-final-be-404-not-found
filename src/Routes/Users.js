@@ -46,7 +46,7 @@ router.post("/", async (req, res) => {
       .send({ message: "Usuario creado con éxito", user: savedUser });
   } catch (err) {
     // Manejar errores, ya sea por duplicados o problemas al crear el usuario
-    res.status(400).send({ message: err.message });
+    res.status(500).send({ message: err.message });
   }
 });
 

@@ -37,7 +37,7 @@ const TripSchema = new Schema({
 
   busyNow: { type: Number, required: false },
 
-  paymentMethods: [{ method: { type: String, required: true } }],
+  paymentMethods: [String],
 
   waitingPassengers: [
     {

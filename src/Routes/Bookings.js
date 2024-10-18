@@ -30,7 +30,7 @@ router.post("/:id", decode, async (req, res) => {
 
     // Verificar si el método de pago está en la lista de métodos de pago del viaje
     const isPaymentMethodValid = trip.paymentMethods.some(
-      (method) => method === paymentMethod
+      (method) => method.toLowerCase() === paymentMethod.toLowerCase()
     );
 
     if (!isPaymentMethodValid && trip.paymentMethods) {
@@ -89,7 +89,7 @@ router.put("/:id", decode, async (req, res) => {
 
     // Verificar si el método de pago está en la lista de métodos de pago del viaje
     const isPaymentMethodValid = trip.paymentMethods.some(
-      (method) => method === paymentMethod
+      (method) => method.toLowerCase() === paymentMethod.toLowerCase()
     );
 
     if (!isPaymentMethodValid) {

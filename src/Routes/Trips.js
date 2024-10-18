@@ -111,7 +111,9 @@ router.post("/accept", decode, async (req, res) => {
     }
 
     // Find the passenger in the waitingPassengers list using their _id
-    const passenger = waitingPassengers.find((p) => p._id === id);
+    const passenger = waitingPassengers.find(
+      (p) => p._id.toString() === id.toString()
+    );
 
     if (!passenger) {
       return res.status(404).json({ message: "Pasajero no encontrado" });

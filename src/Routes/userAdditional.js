@@ -2,10 +2,7 @@ const { Router } = require("express");
 const router = Router();
 
 const { User } = require("../Models/User.model.js");
-const { Trip } = require("../Models/Trip.model.js");
-const { hashData, verifyPassword } = require("../Middlewares/hashing.js");
-const { decode, codify } = require("../Middlewares/secure.js");
-const { Car } = require("../Models/Car.model.js");
+const { decode } = require("../Middlewares/secure.js");
 
 router.post("/recommend", decode, async (req, res) => {
   try {
@@ -55,8 +52,6 @@ router.get("/recommend", decode, async (req, res) => {
     });
   }
 });
-
-router.post("/forgottenpass", (req, res) => {});
 
 router.post("/comments", decode, async (req, res) => {
   try {

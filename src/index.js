@@ -23,9 +23,10 @@ mongoose
 app.use("/car", require("./Routes/Cars"));
 app.use("/trip", require("./Routes/Trips"));
 app.use("/user", require("./Routes/Users"));
+app.use("/email", require("./Routes/Emails"));
 app.use("/trip/booking", require("./Routes/Bookings"));
 app.use("/trip/list", require("./Routes/ListRequests"));
-app.use("/user/additional", require("./Routes/userAdditional"));
+app.use("/user/additional", require("./Routes/UserAdditional"));
 
 // Capturar rutas no definidas (404)
 app.use((req, res) => {

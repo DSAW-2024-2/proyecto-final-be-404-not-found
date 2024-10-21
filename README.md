@@ -16,8 +16,8 @@
 > **DESCRIPCCION**:  Envía un correo electrónico al usuario con un enlace para validar su cuenta. (Junto con un Token, que se envia a Registro de Sesion, Para tener todos los datos)  
 > **AUTORIZACION**: No  
 > **BODY**:
-> ```json
-{ "firstName": "user", "lastName": "1","idUniversidad": "0000300562","userName":"user1","email": "user1@unisabana.edu.co","phone": "1234567890","password": "user1"} 
+```json
+> { "firstName": "user", "lastName": "1","idUniversidad": "0000300562","userName":"user1","email": "user1@unisabana.edu.co","phone":"1234567890","password": "user1"} 
 ```
 
 ## CREAR USUARIO

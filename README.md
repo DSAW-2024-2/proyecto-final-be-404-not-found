@@ -9,6 +9,7 @@
 # RUTAS DOCUMENTACION
 
 ## VERIFICAR EMAIL
+
 > [!IMPORTANT]
 > **METHODO**: ```POST```    
 > **RUTA**:```/email/validate```  
@@ -16,12 +17,12 @@
 > **AUTORIZACION**: No  
 > **BODY**:
 > ```json
->  { "firstName": "user", "lastName": "1","idUniversidad": "0000300562","userName":"user1","email": "user1@unisabana.edu.co","phone": "1234567890","password": "user1"} 
+{ "firstName": "user", "lastName": "1","idUniversidad": "0000300562","userName":"user1","email": "user1@unisabana.edu.co","phone": "1234567890","password": "user1"} 
 ```
 
 ## CREAR USUARIO
 
->[!IMPORTANT]
+> [!IMPORTANT]
 > **METHODO**: ```POST ```   
 > **RUTA**: ```/user```  
 > **DESCRIPCCION**:  Crea un nuevo usuario después de verificar que no exista un usuario con el mismo ```idUniversidad```, ```email``` o ```userName```.  

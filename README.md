@@ -1,6 +1,6 @@
 # Hola Isa
 
-> **[!NOTE]**  
+> [!NOTE] 
 > **Base de Datos MongoDB**  
 > **Usuario**: 404Found  
 > **Contraseña**: AXHl  

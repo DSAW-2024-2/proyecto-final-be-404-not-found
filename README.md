@@ -1,20 +1,20 @@
 # Hola Isa
 
-> [!WARN] 
+> [!WARNING] 
 > **Base de Datos MongoDB**  
 > **Usuario**: 404NotFound  
-> **Contraseña**: AXHtFgTMMyPUoeQl
+> **Contraseña**: AXHtFgTMMyPUoeQl  
 > **URL Connection** = "mongodb+srv://404NotFound:AXHtFgTMMyPUoeQl@wheels.mnm6c.mongodb.net/?retryWrites=true&w=majority&appName=Wheels"
 
 # RUTAS DOCUMENTACION
 ## USUARIO
 
 > [!IMPORTANT]
-> **METHODO**: POST
-> **RUTA**: ```BASH /user ```
-> **DESCRIPCCION**:
-> **AUTORIZACION**:
-> **BODY**:
+> **METHODO**: POST  
+> **RUTA**: ```BASH /user ```  
+> **DESCRIPCCION**:  Crea un nuevo usuario después de verificar que no exista un usuario con el mismo idUniversidad, email o userName.  
+> **AUTORIZACION**: SI (El Token que te dan despues de validar el Email)  
+> **BODY**: No Necesario
 
 > [!IMPORTANT]
 > **METHODO**:

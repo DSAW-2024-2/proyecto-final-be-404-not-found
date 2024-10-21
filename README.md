@@ -7,12 +7,28 @@
 > **URL Connection** = "mongodb+srv://404NotFound:AXHtFgTMMyPUoeQl@wheels.mnm6c.mongodb.net/?retryWrites=true&w=majority&appName=Wheels"
 
 # RUTAS DOCUMENTACION
-## USUARIO
 
+## VERIFICAR EMAIL
 > [!IMPORTANT]
-> **METHODO**: POST  
-> **RUTA**: ```BASH /user ```  
-> **DESCRIPCCION**:  Crea un nuevo usuario después de verificar que no exista un usuario con el mismo idUniversidad, email o userName.  
+> **METHODO**: ```POST```  
+> **RUTA**:```/email/validate```
+> **DESCRIPCCION**:  Envía un correo electrónico al usuario con un enlace para validar su cuenta. (JUnto con un Token, que se envia a Registro de Sesion, Para tener todos los datos)
+> **AUTORIZACION**: No
+> **BODY**: ```json {
+  "firstName": "user",
+  "lastName": "1",
+  "idUniversidad": "0000300562",
+  "userName":"user1",
+  "email": "user1@unisabana.edu.co",
+  "phone": "1234567890",
+  "password": "user1"
+} ```
+
+## CREAR USUARIO
+> [!IMPORTANT]
+> **METHODO**: ```POST ```   
+> **RUTA**: ```/user```  
+> **DESCRIPCCION**:  Crea un nuevo usuario después de verificar que no exista un usuario con el mismo ```idUniversidad```, ```email``` o ```userName```.  
 > **AUTORIZACION**: SI (El Token que te dan despues de validar el Email)  
 > **BODY**: No Necesario
 

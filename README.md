@@ -21,7 +21,7 @@
 
 ## CREAR USUARIO
 
-> [!IMPORTANT]
+>[!IMPORTANT]
 > **METHODO**: ```POST ```   
 > **RUTA**: ```/user```  
 > **DESCRIPCCION**:  Crea un nuevo usuario después de verificar que no exista un usuario con el mismo ```idUniversidad```, ```email``` o ```userName```.  
@@ -30,7 +30,7 @@
 
 ## LOG IN
 
-> [!IMPORTANT]
+>[!IMPORTANT]
 > **METHODO**:```POST```  
 > **RUTA**: ```/user/login```  
 > **DESCRIPCCION**: Autentica al usuario usando su correo electrónico o nombre de usuario, y su contraseña. Devuelve un token de autenticación.   

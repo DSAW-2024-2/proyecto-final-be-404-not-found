@@ -1,12 +1,50 @@
 # Hola Isa
 
-> [!NOTE] 
+> [!WARN] 
 > **Base de Datos MongoDB**  
-> **Usuario**: 404Found  
-> **Contraseña**: AXHl  
+> **Usuario**: 404NotFound  
+> **Contraseña**: AXHtFgTMMyPUoeQl
+> **URL Connection** = "mongodb+srv://404NotFound:AXHtFgTMMyPUoeQl@wheels.mnm6c.mongodb.net/?retryWrites=true&w=majority&appName=Wheels"
+
+# RUTAS DOCUMENTACION
+## USUARIO
+
+> [!IMPORTANT]
+> **METHODO**: POST
+> **RUTA**: ```BASH /user ```
+> **DESCRIPCCION**:
+> **AUTORIZACION**:
+> **BODY**:
+
+> [!IMPORTANT]
+> **METHODO**:
+> **RUTA**:
+> **DESCRIPCCION**:
+> **AUTORIZACION**:
+> **BODY**:
+
+> [!IMPORTANT]
+> **METHODO**:
+> **RUTA**:
+> **DESCRIPCCION**:
+> **AUTORIZACION**:
+> **BODY**:
+
+> [!IMPORTANT]
+> **METHODO**:
+> **RUTA**:
+> **DESCRIPCCION**:
+> **AUTORIZACION**:
+> **BODY**:
+
+> [!IMPORTANT]
+> **METHODO**:
+> **RUTA**:
+> **DESCRIPCCION**:
+> **AUTORIZACION**:
+> **BODY**:
 
 
-url connection = "mongodb+srv://404NotFound:AXHtFgTMMyPUoeQl@wheels.mnm6c.mongodb.net/?retryWrites=true&w=majority&appName=Wheels"
 
 ## Lo que he entendido de Mongoose
 

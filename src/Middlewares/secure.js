@@ -26,6 +26,15 @@ const codify = async function (user) {
   }
 };
 
+const newUser = async function (body) {
+  try {
+    const token = await jwt.sign(body, secretKey);
+    return token;
+  } catch (error) {
+    throw new Error(`Error al generar el token: ${error.message}`);
+  }
+};
+
 const decode = function (req, res, next) {
   try {
     const token = req.headers["authorization"]?.split(" ")[1]; // Verifica si el token existe
@@ -49,4 +58,4 @@ const decode = function (req, res, next) {
   }
 };
 
-module.exports = { decode, codify };
+module.exports = { decode, codify, newUser };

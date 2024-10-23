@@ -1,10 +1,7 @@
-//AQUI SE HACEN TODOS LOS AJUSTES DE LA API EN GENERAL
-DataBase =
-  "mongodb+srv://404NotFound:AXHtFgTMMyPUoeQl@wheels.mnm6c.mongodb.net/?retryWrites=true&w=majority&appName=Wheels";
-
 //1. IMPORTAR DEPENDENCIAS
 const express = require("express");
 const app = express();
+require("dotenv").config();
 
 const cors = require("cors");
 const mongoose = require("mongoose");
@@ -15,7 +12,7 @@ app.use(cors());
 
 // Conexión a MongoDB usando Mongoose
 mongoose
-  .connect(DataBase)
+  .connect(process.env.DB_USER)
   .then(() => console.log("Conectado a MongoDB"))
   .catch((err) => console.error("Error conectando a MongoDB", err));
 

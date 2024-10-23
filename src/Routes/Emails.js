@@ -1,20 +1,19 @@
 const { Router } = require("express");
 const router = Router();
+require("dotenv").config();
 
 // Importar la librería Nodemailer
 const nodemailer = require("nodemailer");
 const { User } = require("../Models/User.model");
-const { decode } = require("../Middlewares/secure");
-//user: "unihopwheels@gmail.com"
-//pass: "maito1234!",
+const { newUser } = require("../Middlewares/secure");
 
 const sendEmail = (mailOption) => {
   // Crear un objeto de transporte
   const transporter = nodemailer.createTransport({
     service: "gmail", // Usando Gmail
     auth: {
-      user: "unihopwheels@gmail.com", // Tu correo de Gmail
-      pass: "jrml vpsw bstp vbjr", // Tu contraseña de Gmail o contraseña de app
+      user: process.env.EmailUser, // Tu correo de Gmail
+      pass: process.env.EmailPass, // Tu contraseña de Gmail o contraseña de app
     },
   });
 
@@ -53,6 +52,7 @@ router.post("/forgottenpass", async (req, res) => {
 
 router.post("/validate", async (req, res) => {
   try {
+    const token = await newUser(req.body);
     const { email } = req.body;
     if (!email) {
       return res.status(404).json({ message: "Email is required" });
@@ -62,7 +62,7 @@ router.post("/validate", async (req, res) => {
       to: email,
       subject: "Validación de cuenta",
       html: `<p>Hola, para validar tu cuenta, haz clic en el siguiente enlace
-        <a href='http://localhost:3000/validate'>Validar cuenta</a></
+        <a href='http://localhost:3000/validate/${token}'>Validar cuenta</a></
         p>`,
     };
     sendEmail(mailOption);

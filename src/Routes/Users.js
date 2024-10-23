@@ -30,13 +30,13 @@ const existing = async (newUser) => {
   }
 };
 
-router.post("/", async (req, res) => {
+router.post("/", decode, async (req, res) => {
   try {
     // Verificar si el usuario ya existe
-    await existing(req.body);
+    await existing(req.user);
 
     // Hashear la contraseña antes de guardar el usuario
-    const hashedData = await hashData(req.body);
+    const hashedData = await hashData(req.user);
     const newUser = new User(hashedData);
 
     // Guardar el nuevo usuario si no existe

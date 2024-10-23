@@ -1,11 +1,5 @@
 # Hola Isa
 
-> [!WARNING] 
-> **Base de Datos MongoDB**  
-> **Usuario**: 404NotFound  
-> **Contraseña**: AXHtFgTMMyPUoeQl  
-> **URL Connection** = "mongodb+srv://404NotFound:AXHtFgTMMyPUoeQl@wheels.mnm6c.mongodb.net/?retryWrites=true&w=majority&appName=Wheels"
-
 # RUTAS DOCUMENTACION
 
 ## VERIFICAR EMAIL

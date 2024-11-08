@@ -23,7 +23,7 @@ app.use("/user", require("./Routes/Users"));
 app.use("/email", require("./Routes/Emails"));
 app.use("/trip/booking", require("./Routes/Bookings"));
 app.use("/trip/list", require("./Routes/ListRequests"));
-app.use("/user/additional", require("./Routes/UserAdditional"));
+app.use("/user/additional", require("./Routes/userAdditional"));
 
 // Capturar rutas no definidas (404)
 app.use((req, res) => {

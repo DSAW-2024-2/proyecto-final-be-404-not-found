@@ -30,7 +30,7 @@ const existing = async (newUser) => {
   }
 };
 
-router.post("/register", decode, async (req, res) => {
+router.post("/", decode, async (req, res) => {
   try {
     // Verificar si el usuario ya existe
     await existing(req.user);

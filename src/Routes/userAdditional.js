@@ -90,4 +90,23 @@ router.post("/comments", decode, async (req, res) => {
   }
 });
 
+router.get("/comments", decode, async (req, res) => {
+  try {
+    const { id } = req.user;
+
+    // Buscar al usuario por su ID
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+    // Buscar los ratings del usuario
+    res.json(user.ratings);
+  } catch (err) {
+    res.status(500).json({
+      message: "Error al buscar comentarios",
+      error: err.message,
+    });
+  }
+});
+
 module.exports = router;

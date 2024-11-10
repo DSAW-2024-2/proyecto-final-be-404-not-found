@@ -6,6 +6,7 @@ const { User } = require("../Models/User.model.js");
 const { Trip } = require("../Models/Trip.model.js");
 
 const { decode } = require("../Middlewares/secure.js");
+const { decodeImage } = require("../FireBase/Images.js");
 
 router.post("/", decode, async (req, res) => {
   try {
@@ -117,6 +118,12 @@ router.get("/", decode, async (req, res) => {
     if (!car) {
       return res.status(404).send({ message: "Carro no encontrado" });
     }
+    const { licensePhoto, vehiclePhoto, soatPhoto } = car;
+
+    car.licensePhoto = await decodeImage(licensePhoto);
+    car.vehiclePhoto = await decodeImage(vehiclePhoto);
+    car.soatPhoto = await decodeImage(soatPhoto);
+
     res.status(200).json(car);
   } catch (err) {
     res

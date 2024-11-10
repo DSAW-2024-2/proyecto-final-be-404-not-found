@@ -6,6 +6,7 @@ const { Trip } = require("../Models/Trip.model.js");
 const { hashData, verifyPassword } = require("../Middlewares/hashing.js");
 const { decode, codify } = require("../Middlewares/secure.js");
 const { Car } = require("../Models/Car.model.js");
+const { decodeImage } = require("../FireBase/Images.js");
 
 const existing = async (newUser) => {
   // Verificar si ya existe un usuario con el mismo `idUniversidad`, `email` o `userName`
@@ -167,16 +168,23 @@ router.post("/login", async (req, res) => {
   }
 });
 
-router.get("/", (req, res) => {
-  User.find()
-    .then((users) => {
-      res.json(users);
-    })
-    .catch((err) => {
-      res
-        .status(500)
-        .send({ message: "Error al obtener los usuarios", error: err });
-    });
+router.get("/", decode, async (req, res) => {
+  try {
+    const { id } = req.user;
+    const user = await User.findById(id);
+    if (!user) {
+      return res.status(404).send({ message: "Usuario no encontrado" });
+    }
+    const { imageProfile } = user;
+    const url = await decodeImage(imageProfile);
+    user.imageProfile = url;
+
+    res.status(200).json(user);
+  } catch (err) {
+    res
+      .status(500)
+      .send({ message: "Error al obtener el usuario", error: err.message });
+  }
 });
 
 module.exports = router;

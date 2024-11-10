@@ -17,6 +17,12 @@ mongoose
   .catch((err) => console.error("Error conectando a MongoDB", err));
 
 //USANDO ROUTES PARA SEPARAR EL CODIGO EN MODULOS
+
+app.use("/api-wheels/v1", (req, res, next)=>{
+  //RUTA RAIZ
+  next()
+})
+
 app.use("/car", require("./Routes/Cars"));
 app.use("/trip", require("./Routes/Trips"));
 app.use("/user", require("./Routes/Users"));
@@ -24,6 +30,7 @@ app.use("/email", require("./Routes/Emails"));
 app.use("/trip/booking", require("./Routes/Bookings"));
 app.use("/trip/list", require("./Routes/ListRequests"));
 app.use("/user/additional", require("./Routes/userAdditional"));
+app.use("/firebase", require("./Routes/Files"));
 
 // Capturar rutas no definidas (404)
 app.use((req, res) => {

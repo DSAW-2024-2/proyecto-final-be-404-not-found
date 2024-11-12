@@ -89,7 +89,7 @@ router.post("/forgottenpass", async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
     const html = `<td align="center" bgcolor="#003366" style="border-radius: 4px;">
-                                        <a href='http://localhost:3000/validate?token=${token}' target="_blank" style="display: inline-block; padding: 16px 36px; font-size: 16px; color: #ffffff; text-decoration: none;">Ver Novedades</a>
+                                        <a href='${process.env.URL_FRONTEND}?token=${token}' target="_blank" style="display: inline-block; padding: 16px 36px; font-size: 16px; color: #ffffff; text-decoration: none;">Ver Novedades</a>
                                     </td>`;
     const messageHtml = templateHtml(html);
     const mailOption = {
@@ -115,7 +115,7 @@ router.post("/validate", async (req, res) => {
       return res.status(404).json({ message: "Email is required" });
     }
     const html = `<td align="center" bgcolor="#003366" style="border-radius: 4px;">
-                                        <a href='http://localhost:3000/validate/${token}' target="_blank" style="display: inline-block; padding: 16px 36px; font-size: 16px; color: #ffffff; text-decoration: none;">Ver Novedades</a>
+                                        <a href='${process.env.URL_FRONTEND}?token=${token}' target="_blank" style="display: inline-block; padding: 16px 36px; font-size: 16px; color: #ffffff; text-decoration: none;">Ver Novedades</a>
                                     </td>`;
     const messageHtml = templateHtml(html);
     const mailOption = {

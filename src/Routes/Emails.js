@@ -26,6 +26,61 @@ const sendEmail = (mailOption) => {
   });
 };
 
+const templateHtml = (add) => {
+  return `<body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f4f4f4;">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; margin: 0 auto; background-color: #ffffff;">
+        <tr>
+            <td align="center" bgcolor="#003366" style="padding: 40px 0;">
+                <h1 style="color: #ffffff; font-size: 24px; margin: 0;">UniHop</h1>
+            </td>
+        </tr>
+        <tr>
+            <td style="padding: 40px 30px;">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                    <tr>
+                        <td>
+                            <h2 style="color: #003366; font-size: 20px; margin: 0 0 20px 0;">Estimado Usuario,</h2>
+                            <p style="color: #333333; font-size: 16px; line-height: 24px; margin: 0 0 20px 0;">
+                                Esperamos que este mensaje te encuentre bien. Queremos informarte sobre las últimas novedades y oportunidades disponibles en UniHop.
+                            </p>
+                            <p style="color: #333333; font-size: 16px; line-height: 24px; margin: 0 0 20px 0;">
+                                UniHop se dedica a mejorar la experiencia universitaria de nuestros estudiantes. Hemos implementado nuevas características en nuestra plataforma para hacer tu vida académica más fácil y productiva.
+                            </p>
+                            <p style="color: #333333; font-size: 16px; line-height: 24px; margin: 0 0 30px 0;">
+                                Para conocer más sobre estas novedades y cómo pueden beneficiarte, te invitamos a visitar nuestra página de información:
+                            </p>
+                            <table border="0" cellpadding="0" cellspacing="0">
+                                <tr>
+                                    ${add}
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td align="center" bgcolor="#e9ecef" style="padding: 24px;">
+                <p style="color: #666666; font-size: 14px; line-height: 20px; margin: 0;">
+                    &copy; 2023 UniHop. Todos los derechos reservados.
+                </p>
+            </td>
+        </tr>
+    </table>
+</body>`;
+};
+
+/*
+
+<td align="center" bgcolor="#003366" style="border-radius: 4px;">
+                                        <a href='http://localhost:3000/validate/${token}' target="_blank" style="display: inline-block; padding: 16px 36px; font-size: 16px; color: #ffffff; text-decoration: none;">Ver Novedades</a>
+                                    </td>
+
+`<p>Hola, para validar tu cuenta, haz clic en el siguiente enlace
+        <a href='http://localhost:3000/validate/${token}'>Validar cuenta</a></
+        p>`
+*/
+
 router.post("/forgottenpass", async (req, res) => {
   try {
     const { userName } = req.body;
@@ -33,13 +88,15 @@ router.post("/forgottenpass", async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
+    const html = `<td align="center" bgcolor="#003366" style="border-radius: 4px;">
+                                        <a href='${process.env.URL_FRONTEND}?token=${token}' target="_blank" style="display: inline-block; padding: 16px 36px; font-size: 16px; color: #ffffff; text-decoration: none;">Ver Novedades</a>
+                                    </td>`;
+    const messageHtml = templateHtml(html);
     const mailOption = {
       from: "UniHop Servicio de Wheels",
       to: user.email,
       subject: "Reestablecer contraseña",
-      html: `<p>Hola, para reestablecer tu contraseña, haz clic en el
-        siguiente enlace: <a href='http://localhost:3000/recovery-password'>Re
-        establecer contraseña</a></p>`,
+      html: messageHtml,
     };
     sendEmail(mailOption);
     res.json({ message: "Email sent" });
@@ -57,13 +114,15 @@ router.post("/validate", async (req, res) => {
     if (!email) {
       return res.status(404).json({ message: "Email is required" });
     }
+    const html = `<td align="center" bgcolor="#003366" style="border-radius: 4px;">
+                                        <a href='${process.env.URL_FRONTEND}/verify-email?token=${token}' target="_blank" style="display: inline-block; padding: 16px 36px; font-size: 16px; color: #ffffff; text-decoration: none;">Ver Novedades</a>
+                                    </td>`;
+    const messageHtml = templateHtml(html);
     const mailOption = {
       from: "UniHop Servicio de Wheels",
       to: email,
       subject: "Validación de cuenta",
-      html: `<p>Hola, para validar tu cuenta, haz clic en el siguiente enlace
-        <a href='http://localhost:3000/validate/${token}'>Validar cuenta</a></
-        p>`,
+      html: messageHtml,
     };
     sendEmail(mailOption);
     res.json({ message: "Email sent" });

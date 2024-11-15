@@ -3,6 +3,7 @@ const { CarSchema } = require("../Models/Car.model");
 
 // Definir un esquema de ejemplo
 const UserSchema = new Schema({
+  imageProfile: { type: String, required: false },
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   userName: { type: String, required: true, unique: true },

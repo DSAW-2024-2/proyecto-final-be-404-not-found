@@ -28,7 +28,7 @@ const codify = async function (user) {
 
 const newUser = async function (body) {
   try {
-    const token = await jwt.sign(body, secretKey);
+    const token = await jwt.sign(body, secretKey, { expiresIn: "10m" });
     return token;
   } catch (error) {
     throw new Error(`Error al generar el token: ${error.message}`);

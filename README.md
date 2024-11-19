@@ -231,7 +231,7 @@
 
 ## Listado de Viajes
 
-### GET /trip/list
+### GET /trip/list/complete
 
 - **Descripción**: Obtiene una lista de todos los viajes disponibles.
 - **Autenticación**: No

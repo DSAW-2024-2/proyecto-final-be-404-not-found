@@ -39,16 +39,6 @@ const templateHtml = (add) => {
                 <table border="0" cellpadding="0" cellspacing="0" width="100%">
                     <tr>
                         <td>
-                            <h2 style="color: #003366; font-size: 20px; margin: 0 0 20px 0;">Estimado Usuario,</h2>
-                            <p style="color: #333333; font-size: 16px; line-height: 24px; margin: 0 0 20px 0;">
-                                Esperamos que este mensaje te encuentre bien. Queremos informarte sobre las últimas novedades y oportunidades disponibles en UniHop.
-                            </p>
-                            <p style="color: #333333; font-size: 16px; line-height: 24px; margin: 0 0 20px 0;">
-                                UniHop se dedica a mejorar la experiencia universitaria de nuestros estudiantes. Hemos implementado nuevas características en nuestra plataforma para hacer tu vida académica más fácil y productiva.
-                            </p>
-                            <p style="color: #333333; font-size: 16px; line-height: 24px; margin: 0 0 30px 0;">
-                                Para conocer más sobre estas novedades y cómo pueden beneficiarte, te invitamos a visitar nuestra página de información:
-                            </p>
                             <table border="0" cellpadding="0" cellspacing="0">
                                 <tr>
                                     ${add}
@@ -71,6 +61,17 @@ const templateHtml = (add) => {
 };
 
 /*
+
+<h2 style="color: #003366; font-size: 20px; margin: 0 0 20px 0;">Estimado Usuario,</h2>
+                            <p style="color: #333333; font-size: 16px; line-height: 24px; margin: 0 0 20px 0;">
+                                Esperamos que este mensaje te encuentre bien. Queremos informarte sobre las últimas novedades y oportunidades disponibles en UniHop.
+                            </p>
+                            <p style="color: #333333; font-size: 16px; line-height: 24px; margin: 0 0 20px 0;">
+                                UniHop se dedica a mejorar la experiencia universitaria de nuestros estudiantes. Hemos implementado nuevas características en nuestra plataforma para hacer tu vida académica más fácil y productiva.
+                            </p>
+                            <p style="color: #333333; font-size: 16px; line-height: 24px; margin: 0 0 30px 0;">
+                                Para conocer más sobre estas novedades y cómo pueden beneficiarte, te invitamos a visitar nuestra página de información:
+                            </p>
 
 <td align="center" bgcolor="#003366" style="border-radius: 4px;">
                                         <a href='http://localhost:3000/validate/${token}' target="_blank" style="display: inline-block; padding: 16px 36px; font-size: 16px; color: #ffffff; text-decoration: none;">Ver Novedades</a>

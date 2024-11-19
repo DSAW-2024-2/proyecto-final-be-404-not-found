@@ -31,6 +31,28 @@ const existing = async (newUser) => {
   }
 };
 
+router.post("/backup/register", async (req, res) => {
+  try {
+    req.user = req.body;
+
+    // Verificar si el usuario ya existe
+    await existing(req.user);
+
+    // Hashear la contraseña antes de guardar el usuario
+    const hashedData = await hashData(req.user);
+    const newUser = new User(hashedData);
+
+    // Guardar el nuevo usuario si no existe
+    const savedUser = await newUser.save();
+    res
+      .status(200)
+      .send({ message: "Usuario creado con éxito", user: savedUser });
+  } catch (err) {
+    // Manejar errores, ya sea por duplicados o problemas al crear el usuario
+    res.status(500).send({ message: err.message });
+  }
+});
+
 router.post("/", decode, async (req, res) => {
   try {
     // Verificar si el usuario ya existe
@@ -184,6 +206,17 @@ router.get("/", decode, async (req, res) => {
     res
       .status(500)
       .send({ message: "Error al obtener el usuario", error: err.message });
+  }
+});
+
+router.get("/all", async (req, res) => {
+  try {
+    const users = await User.find();
+    res.status(200).json(users);
+  } catch (err) {
+    res
+      .status(500)
+      .send({ message: "Error al obtener los usuarios", error: err });
   }
 });
 

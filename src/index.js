@@ -36,6 +36,6 @@ app.use((req, res) => {
 //3. INICIAR LA API
 let port = process.env.PORT || 3000;
 app.set("port", port);
-app.listen(app.get("port"), () => {
+app.listen(app.get("port"), "0.0.0.0", () => {
   console.log(`server is running on port ${port}`);
 });

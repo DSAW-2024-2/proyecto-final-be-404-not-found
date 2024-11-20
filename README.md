@@ -1,67 +1,350 @@
-# Taller en Parejas: Creación de un Endpoint con Express.js
+# Documentación de la API
 
-Este proyecto consiste en un reto de desarrollo backend en el que se debe crear un endpoint llamado `user-info` utilizando el framework Express.js. El objetivo principal es que, al hacer una solicitud GET a este endpoint, se retorne un objeto JSON con la información de uno o dos estudiantes, dependiendo de si el equipo está compuesto por una o dos personas.
+## Base URL: proyecto-final-be-404-not-found.vercel.app/api-wheels/v1
 
-## Contexto
+## Usuarios (Users)
 
-En este reto, debes crear un servidor Express.js que contenga dos endpoints principales. Cada uno de estos endpoints debe devolver información de los estudiantes participantes:
+### GET /user
 
-- `GET /user-info/1` para el primer estudiante.
-- `GET /user-info/2` para el segundo estudiante (si aplica).
+- **Descripción**: Obtiene la información del usuario autenticado.
+- **Autenticación**: Sí (decode middleware)
+- **Respuesta**: Información del usuario, incluyendo la URL de la imagen de perfil.
 
-Si un estudiante trabaja solo, el endpoint `GET /user-info/1` será el único requerido y no debe existir el endpoint `/user-info/2`.
+### POST /user
 
-### Requisitos del JSON
+- **Descripción**: Crea un nuevo usuario.
+- **Autenticación**: Sí (decode middleware)
+- **Body**: No necesario (la información del usuario viene del token)
 
-El objeto JSON que debe retornar cada endpoint debe tener la siguiente estructura:
+### PUT /user
+
+- **Descripción**: Actualiza la información del usuario autenticado.
+- **Autenticación**: Sí (decode middleware)
+- **Body**:
 
 ```json
-{
-  "name": "Nombre del estudiante",
-  "lastName": "Apellido del estudiante",
-  "email": "Correo del estudiante",
-  "id": "ID de la universidad"
+ {{
+  "firstName": "Nuevo Nombre",
+  "lastName": "Nuevo Apellido",
+  "userName": "nuevoUsername",
+  "password": "nuevaContraseña"
 }
+
 ```
 
-### Requisitos técnicos
+### DELETE /user
 
-- Crear un proyecto básico en Node.js con Express.js.
-- Definir los endpoints para obtener datade los usuarios i.e `GET /user-info/1` y `GET /user-info/2` según la cantidad de integrantes del equipo, **es importante que NO queme en el código estos IDs, sino que genere un único endpoint que reciba como parámetro el ID de los estudiantes y con base en él retorne la información. OJO, valide las entradas.**
-- Configurar el servidor para que escuche en el puerto `3000` o cualquier otro de tu elección.
-- Asegurarse de que el servidor esté funcionando correctamente y que cada endpoint retorne el JSON adecuado.
+- **Descripción**: Elimina el usuario autenticado y sus registros relacionados.
+- **Autenticación**: Sí (decode middleware)
 
-### Instrucciones de uso
+### POST /user/login
 
-1. Clonar este repositorio en tu máquina local.
-2. Instalar las dependencias del proyecto con `npm install`.
-3. Definir el/los endpoint(s) en el archivo de rutas principal de Express.js.
-4. Ejecutar el servidor con el comando `npm start`.
-5. Probar los endpoints haciendo solicitudes GET a `http://localhost:3000/user-info/1` y `http://localhost:3000/user-info/2` (si aplica).
+- **Descripción**: Inicia sesión del usuario.
+- **Autenticación**: No
+- **Body**:
 
-### Rúbrica de evaluación
+```json
+ {{
+  "email": "usuario@ejemplo.com",
+  "password": "contraseña"
+}
 
-| Aspecto                        | Puntuación |
-| ------------------------------ | ---------- |
-| Estructura del proyecto         | 1.0        |
-| Implementación correcta de el/los endpoints | 1        |
-| Respuesta correcta del JSON en ambos endpoints | 1.5       |
-| Buenas prácticas en Express.js  | 0.5        |
-| Servidor desplegado correctamente  | 1        |
-| Total                          | 5          |
+```
 
-### Casos especiales
+## Carros (Cars)
 
-- Si el equipo está formado por un solo estudiante, únicamente se debe implementar el endpoint `/user-info/1`.
-- Si hay dos estudiantes, ambos endpoints deben estar implementados y retornar información correcta.
+### GET /car
 
-### Recursos adicionales
+- **Descripción**: Obtiene la información del carro del usuario autenticado.
+- **Autenticación**: Sí (decode middleware)
 
-- [Guía de Express.js](https://expressjs.com/es/)
-- [Guía de Node.js](https://nodejs.org/es/docs/)
-- [ Despliegue de aplicaciones Node.js en Netlify](https://www.netlify.com/blog/2016/09/29/a-step-by-step-guide-deploying-on-netlify/)
-- [Despliegue de aplicaciones Express.js en Vercel]([https://nodejs.org/es/docs/](https://vercel.com/docs/deployments/overview))
+### POST /car
 
--
+- **Descripción**: Registra un nuevo carro para el usuario autenticado.
+- **Autenticación**: Sí (decode middleware)
+- **Body**:
 
+```json
+ {{
+  "brand": "Toyota",
+  "model": "Corolla",
+  "licensePlate": "ABC123",
+  "capacity": "5",
+  "licensePhoto": "nombreFoto",
+  "vehiclePhoto": "nombreFoto",
+  "soatPhoto": "nombreFoto"
+}
 
+```
+
+### PUT /car
+
+- **Descripción**: Actualiza la información del carro del usuario autenticado.
+- **Autenticación**: Sí (decode middleware)
+- **Body**:
+
+```json
+ {{
+  "capacity": "4",
+  "licensePhoto": "nuevaFotoLicencia",
+  "vehiclePhoto": "nuevaFotoVehiculo",
+  "soatPhoto": "nuevaFotoSoat"
+}
+
+```
+
+### DELETE /car
+
+- **Descripción**: Elimina el carro del usuario autenticado.
+- **Autenticación**: Sí (decode middleware)
+
+## Viajes (Trips)
+
+### GET /trip/:id
+
+- **Descripción**: Obtiene información de un viaje específico.
+- **Autenticación**: No
+- **Parámetros**: id (ID del viaje)
+
+### POST /trip
+
+- **Descripción**: Crea un nuevo viaje.
+- **Autenticación**: Sí (decode middleware)
+- **Body**:
+
+```json
+ {{
+  "startPoint": "Universidad",
+  "endPoint": "Centro Comercial",
+  "date": "2024-10-17",
+  "time": "08:00",
+  "route": "Ruta 1",
+  "fare": "5.00",
+  "seatCount": 4,
+  "paymentMethods": ["Efectivo"]
+}
+
+```
+
+### PUT /trip
+
+- **Descripción**: Actualiza la información de un viaje.
+- **Autenticación**: Sí (decode middleware)
+- **Body**:
+
+```json
+ {{
+  "date": "2024-10-26",
+  "time": "17:00"
+}
+
+```
+
+### DELETE /trip
+
+- **Descripción**: Elimina un viaje.
+- **Autenticación**: Sí (decode middleware)
+
+### POST /trip/accept
+
+- **Descripción**: Acepta a un pasajero en espera para el viaje.
+- **Autenticación**: Sí (decode middleware)
+- **Body**:
+
+```json
+ {{
+  "id": "60c72b2f9f1b2c001c8e4eae"
+}
+
+```
+
+### POST /trip/deny
+
+- **Descripción**: Niega a un pasajero en espera para el viaje.
+- **Autenticación**: Sí (decode middleware)
+- **Body**:
+
+```json
+ {{
+  "id": "60c72b2f9f1b2c001c8e4eae"
+}
+
+```
+
+## Reservas (Bookings)
+
+### GET /trip/booking/:id
+
+- **Descripción**: Obtiene las reservas de un usuario para un viaje específico.
+- **Autenticación**: Sí (decode middleware)
+- **Parámetros**: id (ID del viaje)
+
+### POST /trip/booking/:id
+
+- **Descripción**: Crea una nueva reserva para un viaje.
+- **Autenticación**: Sí (decode middleware)
+- **Parámetros**: id (ID del viaje)
+- **Body**:
+
+```json
+ {{
+  "firstName": "Mario",
+  "lastName": "Bros",
+  "email": "mario.bros@example.com",
+  "phone": "555-1234",
+  "stop": "Calle Falsa 123",
+  "paymentMethod": "Efectivo"
+}
+
+```
+
+### PUT /trip/booking/:id
+
+- **Descripción**: Actualiza una reserva existente.
+- **Autenticación**: Sí (decode middleware)
+- **Parámetros**: id (ID del viaje)
+- **Body**:
+
+```json
+ {{
+  "id": "60d21b4667d0d8992e610c85",
+  "stop": "Parada 2",
+  "phone": "0987654321",
+  "email": "nuevo_correo@correo.com"
+}
+
+```
+
+### DELETE /trip/booking/:id
+
+- **Descripción**: Elimina una reserva.
+- **Autenticación**: Sí (decode middleware)
+- **Parámetros**: id (ID del viaje)
+- **Body**:
+
+```json
+ {{
+  "id": "60d21b4667d0d8992e610c85"
+}
+
+```
+
+## Listado de Viajes
+
+### GET /trip/list/complete
+
+- **Descripción**: Obtiene una lista de todos los viajes disponibles.
+- **Autenticación**: No
+
+### GET /trip/list/waiting
+
+- **Descripción**: Obtiene la lista de pasajeros en espera para el viaje del usuario autenticado.
+- **Autenticación**: Sí (decode middleware)
+
+### GET /trip/list/accepted
+
+- **Descripción**: Obtiene la lista de pasajeros aceptados para el viaje del usuario autenticado.
+- **Autenticación**: Sí (decode middleware)
+
+## Emails
+
+### POST /email/validate
+
+- **Descripción**: Envía un correo de validación de cuenta.
+- **Autenticación**: No
+- **Body**:
+
+```json
+ {{
+  "firstName": "user",
+  "lastName": "1",
+  "idUniversidad": "0000300562",
+  "userName": "user1",
+  "email": "user1@unisabana.edu.co",
+  "phone": "1234567890",
+  "password": "user1"
+}
+
+```
+
+### POST /email/forgottenpass
+
+- **Descripción**: Envía un correo para restablecer la contraseña.
+- **Autenticación**: No
+- **Body**:
+
+```json
+ {{
+  "userName": "usuarioEjemplo"
+}
+
+```
+
+## Información Adicional del Usuario
+
+### POST /user/additional/recommend
+
+- **Descripción**: Agrega una recomendación al usuario.
+- **Autenticación**: Sí (decode middleware)
+- **Body**:
+
+```json
+ {{
+  "message": "Excelente conductor, muy puntual."
+}
+
+```
+
+### GET /user/additional/recommend
+
+- **Descripción**: Obtiene las recomendaciones del usuario.
+- **Autenticación**: Sí (decode middleware)
+
+### POST /user/additional/comments
+
+- **Descripción**: Agrega un comentario y calificación a un usuario.
+- **Autenticación**: Sí (decode middleware)
+- **Body**:
+
+```json
+ {
+  "id": "60d21b4667d0d8992e610c85",
+  "score": 5,
+  "comment": "Excelente servicio y muy amable."
+}
+
+```
+
+### GET /user/additional/comments
+
+- **Descripción**: Obtiene los comentarios y calificaciones del usuario.
+- **Autenticación**: Sí (decode middleware)
+
+## Manejo de Archivos (Firebase)
+
+### POST /firebase/upload
+
+- **Descripción**: Sube una imagen a Firebase Storage.
+- **Autenticación**: Sí (decode middleware)
+- **Body**: Form-data con campo "image" conteniendo el archivo a subir.
+
+### PUT /firebase/update/:imageName
+
+- **Descripción**: Actualiza una imagen existente en Firebase Storage.
+- **Autenticación**: Sí (decode middleware)
+- **Parámetros**: imageName (nombre de la imagen a actualizar)
+- **Body**: Form-data con campo "image" conteniendo el nuevo archivo.
+
+### DELETE /firebase/image/:imageName
+
+- **Descripción**: Elimina una imagen de Firebase Storage.
+- **Autenticación**: Sí (decode middleware)
+- **Parámetros**: imageName (nombre de la imagen a eliminar)
+
+### GET /firebase/image/:imageName
+
+- **Descripción**: Obtiene la URL firmada de una imagen en Firebase Storage.
+- **Autenticación**: No
+- **Parámetros**: imageName (nombre de la imagen)
+
+Esta documentación proporciona una visión general completa de todos los endpoints disponibles en la API, incluyendo los métodos HTTP, las rutas, los requisitos de autenticación y los cuerpos de las solicitudes cuando son necesarios.

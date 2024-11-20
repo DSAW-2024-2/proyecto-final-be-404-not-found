@@ -121,7 +121,7 @@
   "route": "Ruta 1",
   "fare": "5.00",
   "seatCount": 4,
-  "paymentMethods": [{ "method": "Efectivo" }]
+  "paymentMethods": ["Efectivo"]
 }
 
 ```
